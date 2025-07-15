@@ -1,8 +1,6 @@
 #include "DxLib.h"
-#include "Pad.h"
 #include "Player.h"
 #include "Camera.h"
-#include "Game.h"
 
 
 // プログラムは WinMain から始まります
@@ -13,7 +11,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ChangeWindowMode(true);
 
 	//画面サイズの変更
-	SetGraphMode(Game::kScreenWindidth, Game::kScreenHeight, Game::kColorDepth);
+	//横1280,縦720、カラービット数32で設定
+	SetGraphMode(1280, 720, 32);
 
 	// DirectX11を使用するようにする。(DirectX9も可、一部機能不可)
 	// Effekseerを使用するには必ず設定する。
@@ -24,22 +23,33 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return -1;			// エラーが起きたら直ちに終了
 	}
 
-	
 	// フルスクリーン切り替え時におかしくならないように
 	SetChangeScreenModeGraphicsSystemResetFlag(false);
 
 	// Zバッファの設定
+	//Zバッファを使用する
 	SetUseZBuffer3D(true);
+	
+	//Zバッファに書き込みを行う
 	SetWriteZBuffer3D(true);
+	
+	//ポリゴンのバックカリングを使用する
 	SetUseBackCulling(true);
 
 	// ダブルバッファモード
 	SetDrawScreen(DX_SCREEN_BACK);
 
+
+	//Playerのポインタを作成
 	Player m_player;
+
+	//playerの初期化
 	m_player.Init();
 
+	//Cameraのポインタを作成
 	Camera m_camera;
+
+	//Cameraの初期化
 	m_camera.Init();
 	
 	// ゲームループ
@@ -51,10 +61,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// 描画を行う前に画面をクリアする
 		ClearDrawScreen();
 
-		
+		//ゲーム画面の更新
+		//Plyaerの更新
+		m_player.Update();
+
+		//Cameraの更新
+		//Playerの座標位置を受け取る
+		m_camera.Update(m_player.GetPos());
 
 		//ゲーム画面の描画
-		
+		//Playerの描画
+		m_player.Draw();
 
 		// 画面が切り替わるのを待つ
 		ScreenFlip();

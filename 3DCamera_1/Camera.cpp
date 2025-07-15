@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include <cmath>
 
-Camera::Camera(): m_cameraAngle(0.0f), m_cameraPos(VGet(0.0f,0.0f,0.0f)), m_cameraTarget(VGet(0.0f,0.0f,0.0f))
+Camera::Camera(): m_cameraAngle(0.0f), m_cameraPos(VGet(0.0f,0.0f, 0.0f)), m_cameraTarget(VGet(0.0f, 0.0f, 0.0f))
 {
 }
 
@@ -13,6 +13,12 @@ void Camera::Init()
 {
 	//奥行100～5000までをカメラの描画範囲とする
 	SetCameraNearFar(10.0f, 8000.0f);
+
+	//カメラ位置の初期位置
+	m_cameraPos = VGet(0.0f, 0.0f, 0.0f);
+
+	//注視点の初期位置
+	m_cameraTarget = VGet(0.0f, 0.0f, 0.0f);
 }
 
 void Camera::Update(VECTOR mplayerPos)
@@ -23,25 +29,25 @@ void Camera::Update(VECTOR mplayerPos)
 	//右にスティックを傾けている
 	if (m_input.Rx > 0)
 	{
-		m_cameraAngle +=0.05f;
+		m_cameraAngleX +=0.05f;
 	}
 	//右にスティックを傾けている
 		//左にスティックを傾けている
 	if (m_input.Rx < 0)
 	{
-		m_cameraAngle -= 0.05f;
+		m_cameraAngleX -= 0.05f;
 	}
-
-	//カメラを上下に動かす
-
-
 
 	// カメラ座標
 	//計算内容の解説
-	//VTransform
-	m_cameraPos = VAdd(mplayerPos, VTransform({ 0.0f,  200.0f,-400.0f }, MGetRotY(m_cameraAngle)));
+	//VTransformを行い行列を使った座標変換を行います。MGetRotYを使用しＹ軸回転行列を取得します。
+	//playerの座標と足しているのは、プレイヤーが移動した場合も一定の位置からカメラを映し出すためです
+	m_cameraPos = VAdd(mplayerPos, VTransform({ 0.0f,  200.0f,-400.0f }, MGetRotY(m_cameraAngleX)));
+
+
 
 	// 注視点
+	//同じく、playerの座標を足しているのは、プレイヤーが移動した場合も一定の位置からカメラを映し出すためです
 	m_cameraTarget = VAdd(mplayerPos, VGet(0.0f, 100.0f, 0.0f));
 
 

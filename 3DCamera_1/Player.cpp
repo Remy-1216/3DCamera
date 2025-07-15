@@ -13,7 +13,7 @@ Player::~Player()
 void Player::Init()
 {
 	//モデルをロード、自分がモデルを保存している位置を書く。
-	m_handle = MV1LoadModel("data/model/player/Player.mv1");
+	m_handle = MV1LoadModel("data/Player.mv1");
 
 	//モデルの位置を設定する
 	MV1SetPosition(m_handle, m_pos);
@@ -22,7 +22,7 @@ void Player::Init()
 
 void Player::Update()
 {
-
+	
 }
 
 void Player::Draw()

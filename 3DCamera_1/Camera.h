@@ -22,8 +22,11 @@ private:
     //ジョイパッドの出力の保持
     int m_pad;
 
-    //カメラアングルの位置
-    float m_cameraAngle;
+    //左右のアングルの位置
+    float m_cameraAngleX;
+
+    //上下のアングルの位置
+    float m_cameraAngleY;
 
     //カメラの座標
     VECTOR m_cameraPos;
