@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include <cmath>
 
-Camera::Camera(): m_cameraAngle(0.0f), m_cameraPos(VGet(0.0f,0.0f, 0.0f)), m_cameraTarget(VGet(0.0f, 0.0f, 0.0f))
+Camera::Camera(): m_cameraAngleX(0.0f), m_cameraAngleY(0.0f), m_cameraPos(VGet(0.0f,0.0f, 0.0f)), m_cameraTarget(VGet(0.0f, 0.0f, 0.0f))
 {
 }
 
@@ -29,22 +29,34 @@ void Camera::Update(VECTOR mplayerPos)
 	//右にスティックを傾けている
 	if (m_input.Rx > 0)
 	{
-		m_cameraAngleX +=0.05f;
+		m_cameraAngleX +=0.09f;
 	}
-	//右にスティックを傾けている
-		//左にスティックを傾けている
+	
+	//左にスティックを傾けている
 	if (m_input.Rx < 0)
 	{
-		m_cameraAngleX -= 0.05f;
+		m_cameraAngleX -= 0.09f;
 	}
+
+	//カメラを上下に動かす
+	//上にスティックを傾ける
+	if (m_input.Ry > 0)
+	{
+		m_cameraAngleY += 0.05f;
+	}
+
+	//左にスティックを傾けている
+	if (m_input.Ry < 0)
+	{
+		m_cameraAngleY -= 0.05f;
+	}
+
 
 	// カメラ座標
 	//計算内容の解説
 	//VTransformを行い行列を使った座標変換を行います。MGetRotYを使用しＹ軸回転行列を取得します。
 	//playerの座標と足しているのは、プレイヤーが移動した場合も一定の位置からカメラを映し出すためです
 	m_cameraPos = VAdd(mplayerPos, VTransform({ 0.0f,  200.0f,-400.0f }, MGetRotY(m_cameraAngleX)));
-
-
 
 	// 注視点
 	//同じく、playerの座標を足しているのは、プレイヤーが移動した場合も一定の位置からカメラを映し出すためです
