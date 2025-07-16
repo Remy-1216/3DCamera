@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "Player.h"
 #include "Camera.h"
+#include "Object.h"
 
 
 // プログラムは WinMain から始まります
@@ -39,7 +40,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// ダブルバッファモード
 	SetDrawScreen(DX_SCREEN_BACK);
 
-
 	//Playerのポインタを作成
 	Player m_player;
 
@@ -51,7 +51,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//Cameraの初期化
 	m_camera.Init();
-	
+
+	//Objectのポインタを作成
+	Object m_object;
+
+	//Objectの初期化
+	m_object.Init();
+
 	// ゲームループ
 	while (ProcessMessage() != -1)
 	{
@@ -70,8 +76,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		m_camera.Update(m_player.GetPos());
 
 		//ゲーム画面の描画
+		
+		//Objectの描画
+		m_object.Draw();
+		
 		//Playerの描画
 		m_player.Draw();
+
 
 		// 画面が切り替わるのを待つ
 		ScreenFlip();

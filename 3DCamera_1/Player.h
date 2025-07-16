@@ -17,11 +17,16 @@ public:
 	//描画
 	void Draw();
 
-
-	//プレイヤーの座標位置を渡す
+	//プレイヤーの位置を渡す
 	VECTOR GetPos() const { return m_pos; }
 
 private:
+
+	//ジョイパッドの出力
+	DINPUT_JOYSTATE m_input;
+
+	//ジョイパッドの出力の保持
+	int m_pad;
 
 	//モデルのハンドル
 	int m_handle;

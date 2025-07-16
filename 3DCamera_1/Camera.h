@@ -12,7 +12,7 @@ public:
 
     //カメラの動き
     //カメラを追従するために、プレイヤーの座標位置を受け取る
-    void Update(VECTOR mplayerPos);
+    void Update(VECTOR playerPos);
 
 private:
 
