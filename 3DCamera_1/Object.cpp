@@ -22,7 +22,7 @@ void Object::Init()
 		m_handle[i] = MV1LoadModel("data/Cube_Grass_Single.mv1");
 	}
 	//ç¿ïWà íu
-	m_pos[0] = VGet(1000.0f, 0.0f, 100.0f);
+	m_pos[0] = VGet(100.0f, 0.0f, 100.0f);
 	m_pos[1] = VGet(-1000.0f, 0.0f, -100.0f);
 	m_pos[2] = VGet(1000.0f, 0.0f, -100.0f);
 	m_pos[3] = VGet(-1000.0f, 0.0f, 100.0f);

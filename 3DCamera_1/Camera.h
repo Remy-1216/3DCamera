@@ -14,6 +14,9 @@ public:
     //カメラを追従するために、プレイヤーの座標位置を受け取る
     void Update(VECTOR playerPos);
 
+    //左右のアングルを渡す
+    float GetCameraAngle() const { return m_cameraAngleX; }
+
 private:
 
     //ジョイパッドの出力

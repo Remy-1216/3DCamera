@@ -68,8 +68,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ClearDrawScreen();
 
 		//ゲーム画面の更新
-		//Plyaerの更新
-		m_player.Update();
+		
+		//Plyaerの更新 
+		//Cameraからアングルを受け取る
+		m_player.Update(m_camera.GetCameraAngle());
 
 		//Cameraの更新
 		//Playerの座標位置を受け取る

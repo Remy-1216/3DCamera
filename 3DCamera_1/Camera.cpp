@@ -29,36 +29,14 @@ void Camera::Update(VECTOR playerPos)
 	//右にスティックを傾けている
 	if (m_input.Rx > 0)
 	{
-		m_cameraAngleX +=0.09f;
+		m_cameraAngleX +=0.05f;
 	}
 	
 	//左にスティックを傾けている
 	if (m_input.Rx < 0)
 	{
-		m_cameraAngleX -= 0.09f;
+		m_cameraAngleX -= 0.05f;
 	}
-
-	//カメラを上下に動かす
-	//上にスティックを傾ける
-	if (m_input.Ry < 0)
-	{
-		m_cameraAngleY += 0.05f;
-		if (m_cameraAngleY > 1.0f)
-		{
-			m_cameraAngleY = 1.0f;
-		}
-	}
-
-	//左にスティックを傾けている
-	if (m_input.Ry > 0)
-	{
-		m_cameraAngleY -= 0.05f;
-		if (m_cameraAngleY < 0.0f)
-		{
-			m_cameraAngleY = 0.0f;
-		}
-	}
-
 
 	// カメラ座標
 	//計算内容の解説

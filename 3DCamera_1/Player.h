@@ -11,8 +11,8 @@ public:
 	//初期化
 	void Init();
 
-	//動き
-	void Update();
+	//動き カメラのアングルを受け取る
+	void Update(float cameraAngle);
 
 	//描画
 	void Draw();
@@ -22,16 +22,26 @@ public:
 
 private:
 
-	//ジョイパッドの出力
-	DINPUT_JOYSTATE m_input;
-
-	//ジョイパッドの出力の保持
-	int m_pad;
 
 	//モデルのハンドル
 	int m_handle;
 
+	//キャラクターが向いている方向
+	float m_characterAngle;
+
 	//モデルの座標
 	VECTOR m_pos;
+
+	// キャラクターがどこまで動いたか
+	VECTOR m_move;
+
+	//カメラの回転を方向に変換した値を保存する
+	VECTOR m_movementDirection;
+
+	//カメラのマトリックス
+	MATRIX m_rotMatrix;
+
+	// モデルの回転行列を作成
+	MATRIX m_modelRotMatrix;
 };	
 
